@@ -32,6 +32,10 @@ app.use(express.json());
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
+app.get('/', (req, res) => {
+  res.send('Hello, World!');
+});
+
 // // Route to upload name and image
 app.post('/upload', upload.single('image'), async (req, res) => {
   const { name } = req.body;
