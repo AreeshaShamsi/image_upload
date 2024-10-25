@@ -42,7 +42,7 @@ app.post('/upload', upload.single('image'), async (req, res) => {
   const imageBuffer = req.file ? req.file.buffer : null;
 
   try {
-    const query = 'INSERT INTO user1 (name, image) VALUES ($1, $2) RETURNING *';
+    const query = 'INSERT INTO users (name, image) VALUES ($1, $2) RETURNING *';
     const values = [name, imageBuffer];
     const result = await pool.query(query, values);
     res.status(201).json(result.rows[0]);
@@ -55,7 +55,7 @@ app.post('/upload', upload.single('image'), async (req, res) => {
 // // Route to retrieve records
 app.get('/records', async (req, res) => {
   try {
-    const query = 'SELECT id, name, image FROM user1';
+    const query = 'SELECT id, name, image FROM users';
     const result = await pool.query(query);
 
     const records = result.rows.map((record) => ({
